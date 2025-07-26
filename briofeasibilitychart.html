@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="brio-2.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="brio-2.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="brio-2.png" />
+  <title>Brio Feasibility Chart</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333;
+      line-height: 1.6;
+      padding: clamp(8px, 2vw, 16px);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: min(1400px, 90vw);
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+      padding: clamp(10px, 2vw, 20px);
+    }
+    
+    header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to right, #4b6cb7, #182848);
+      color: white;
+      padding: clamp(8px, 1.5vw, 12px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      width: clamp(60px, 8vw, 100px);
+      height: auto;
+    }
+    
+    .mobile-nav-toggle {
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      color: white;
+      cursor: pointer;
+      display: none;
+      font-family: 'Segoe UI', sans-serif;
+      line-height: 1;
+      padding: clamp(5px, 1vw, 8px);
+    }
+    
+    main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: clamp(15px, 3vw, 30px);
+    }
+    
+    h1, h2, h3 {
+      color: #4b6cb7;
+      font-weight: 700;
+      margin-bottom: clamp(8px, 1.5vw, 16px);
+    }
+    
+    h1 {
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+    }
+    
+    h2 {
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+    }
+    
+    h3 {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+    }
+    
+    .tables-container, .tables-container1, .tables-container2, .tables-container3,
+    .tables-container4, .tables-container5, .tables-container6, .tables-container7,
+    .tables-container8, .tables-container9, .tables-container10, .tables-container11,
+    .tables-container12, .tables-container13, .tables-container14, .tables-container15,
+    .tables-container16, .tables-container17, .tables-container18, .tables-container19,
+    .tables-container20, .tables-container21, .tables-container22, .tables-container23,
+    .tables-container24 {
+      width: 100%;
+      max-width: min(1200px, 90vw);
+      margin: 0 auto clamp(15px, 3vw, 30px);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .table-wrapper, .table-wrapper1, .table-wrapper2, .table-wrapper3,
+    .table-wrapper4, .table-wrapper5, .table-wrapper6, .table-wrapper7,
+    .table-wrapper8, .table-wrapper9, .table-wrapper10, .table-wrapper11,
+    .table-wrapper12, .table-wrapper13, .table-wrapper14, .table-wrapper15,
+    .table-wrapper16, .table-wrapper17, .table-wrapper18, .table-wrapper19,
+    .table-wrapper20, .table-wrapper21, .table-wrapper22, .table-wrapper23,
+    .table-wrapper24 {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: clamp(10px, 2vw, 20px);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: clamp(0.75rem, 1.6vw, 0.9rem);
+    }
+    
+    th, td {
+      padding: clamp(4px, 0.8vw, 8px);
+      border: 1px solid #ddd;
+      text-align: center;
+      white-space: nowrap; /* Prevent wrapping by default */
+    }
+    
+    th {
+      background: #4b6cb7;
+      color: white;
+      font-weight: 600;
+    }
+    
+    .fixed-value {
+      background: #f8f9fa;
+    }
+    
+    .result-cell input {
+      width: 100%;
+      border: none;
+      background: #e9ecef;
+      padding: clamp(4px, 0.8vw, 8px);
+      text-align: center;
+      font-size: clamp(0.75rem, 1.6vw, 0.9rem);
+    }
+    
+    label, input, button {
+      margin: clamp(5px, 1vw, 10px) 0;
+    }
+    
+    label {
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      color: #333;
+      display: block;
+      margin-bottom: clamp(3px, 0.6vw, 6px);
+    }
+    
+    input {
+      width: 100%;
+      max-width: min(400px, 70vw);
+      padding: clamp(6px, 1.2vw, 10px);
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+    }
+    
+    button {
+      background: #4b6cb7;
+      color: white;
+      border: none;
+      padding: clamp(6px, 1.5vw, 10px) clamp(12px, 2.5vw, 18px);
+      border-radius: 5px;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    
+    button:hover {
+      background: #182848;
+    }
+    
+    .warning {
+      color: #e63946;
+      font-size: clamp(0.75rem, 1.6vw, 0.9rem);
+      margin-top: clamp(5px, 1vw, 10px);
+    }
+    
+    footer {
+      text-align: center;
+      padding: clamp(8px, 1.5vw, 12px);
+      background: linear-gradient(to right, #4b6cb7, #182848);
+      color: white;
+      width: 100%;
+      margin-top: auto;
+    }
+    
+    footer h6 {
+      font-size: clamp(0.65rem, 1.4vw, 0.8rem);
+      font-weight: 400;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      body {
+        padding: clamp(6px, 1.5vw, 12px);
+      }
+      
+      .mobile-nav-toggle {
+        display: block;
+      }
+      
+      header {
+        padding: clamp(6px, 1.2vw, 10px);
+      }
+      
+      main {
+        padding: clamp(12px, 2.5vw, 20px);
+      }
+      
+      h1 {
+        font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      }
+      
+      h2 {
+        font-size: clamp(1.2rem, 3vw, 1.8rem);
+      }
+      
+      h3 {
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
+      }
+      
+      input, button {
+        max-width: 80vw;
+      }
+      
+      table {
+        font-size: clamp(0.65rem, 1.4vw, 0.8rem);
+        min-width: 100%; /* Fit to container */
+      }
+      
+      th, td {
+        padding: clamp(3px, 0.6vw, 6px);
+        white-space: normal; /* Allow wrapping on mobile */
+        word-break: break-word; /* Break long words */
+      }
+      
+      .result-cell input {
+        font-size: clamp(0.65rem, 1.4vw, 0.8rem);
+      }
+      
+      footer h6 {
+        font-size: clamp(0.6rem, 1.3vw, 0.75rem);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        padding: clamp(4px, 1vw, 8px);
+      }
+      
+      h1 {
+        font-size: clamp(1.2rem, 3vw, 1.8rem);
+      }
+      
+      h2 {
+        font-size: clamp(1.1rem, 2.8vw, 1.5rem);
+      }
+      
+      h3 {
+        font-size: clamp(0.9rem, 2.2vw, 1.3rem);
+      }
+      
+      table {
+        font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+      }
+      
+      th, td {
+        padding: clamp(2px, 0.5vw, 5px);
+      }
+      
+      .result-cell input {
+        font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+      }
+      
+      input, button {
+        max-width: 90vw;
+        padding: clamp(4px, 1vw, 8px);
+        font-size: clamp(0.75rem, 1.6vw, 0.85rem);
+      }
+      
+      footer h6 {
+        font-size: clamp(0.55rem, 1.2vw, 0.7rem);
+      }
+    }
+    
+    @media (max-width: 320px) {
+      h1 {
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
+      }
+      
+      h2 {
+        font-size: clamp(1rem, 2.5vw, 1.3rem);
+      }
+      
+      h3 {
+        font-size: clamp(0.8rem, 2vw, 1.1rem);
+      }
+      
+      table {
+        font-size: clamp(0.55rem, 1.1vw, 0.7rem);
+        display: block; /* Stack rows on very small screens */
+      }
+      
+      thead, tbody, tr {
+        display: block;
+      }
+      
+      th, td {
+        display: block;
+        width: 100%;
+        padding: clamp(2px, 0.5vw, 4px);
+        text-align: left; /* Align left for stacked layout */
+      }
+      
+      th {
+        background: #4b6cb7;
+        color: white;
+      }
+      
+      td {
+        border-top: none; /* Remove top border for cleaner stacking */
+      }
+      
+      .result-cell input {
+        font-size: clamp(0.55rem, 1.1vw, 0.7rem);
+      }
+      
+      input, button {
+        max-width: 95vw;
+        padding: clamp(3px, 0.8vw, 6px);
+        font-size: clamp(0.7rem, 1.4vw, 0.8rem);
+      }
+      
+      footer h6 {
+        font-size: clamp(0.5rem, 1.1vw, 0.65rem);
+      }
+    }
+    
+    @media (min-width: 1920px) {
+      .container {
+        max-width: min(1600px, 80vw);
+      }
+      
+      h1 {
+        font-size: clamp(2rem, 2.5vw, 3.2rem);
+      }
+      
+      h2 {
+        font-size: clamp(1.6rem, 2vw, 2.6rem);
+      }
+      
+      h3 {
+        font-size: clamp(1.4rem, 1.8vw, 2rem);
+      }
+      
+      table {
+        font-size: clamp(0.9rem, 0.7vw, 1.1rem);
+      }
+      
+      input, button {
+        max-width: min(500px, 60vw);
+      }
+      
+      footer h6 {
+        font-size: clamp(0.8rem, 0.6vw, 1rem);
+      }
+    }
+    
+    @media (min-width: 2560px) {
+      .container {
+        max-width: min(1800px, 70vw);
+      }
+      
+      h1 {
+        font-size: clamp(2.2rem, 2vw, 3.5rem);
+      }
+      
+      h2 {
+        font-size: clamp(1.8rem, 1.8vw, 2.8rem);
+      }
+      
+      h3 {
+        font-size: clamp(1.5rem, 1.6vw, 2.2rem);
+      }
+      
+      table {
+        font-size: clamp(1rem, 0.8vw, 1.2rem);
+      }
+      
+      input, button {
+        max-width: min(600px, 50vw);
+      }
+    }
+  </style>
+  <script>
+    // Check if the user is logged in
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      // Redirect to login page if not logged in
+      window.location.href = "index.html";
+    }
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <img src="logo.png" alt="Brio Logo" class="logo">
+    <i class="mobile-nav-toggle">☰</i>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <h1>Brio Feasibility Chart</h1>
+      
+      <!-- Door Opening and Shaft Size Requirements -->
+      <h2>Door Opening and Shaft Size Requirements</h2>
+      <div class="tables-container">
+        <div class="table-wrapper">
+          <h3>Centre Opening Min Shaft Sizes</h3>
+          <table>
+            <tr>
+              <th>Clear Opening</th>
+              <th>Min Shaft Required</th>
+            </tr>
+            <tr><td>500</td><td>1200</td></tr>
+            <tr><td>550</td><td>1250</td></tr>
+            <tr><td>600</td><td>1350</td></tr>
+            <tr><td>650</td><td>1400</td></tr>
+            <tr><td>700</td><td>1550</td></tr>
+            <tr><td>750</td><td>1700</td></tr>
+            <tr><td>800</td><td>1750</td></tr>
+            <tr><td>900</td><td>1950</td></tr>
+            <tr><td>1000</td><td>2150</td></tr>
+          </table>
+        </div>
+        <div class="table-wrapper">
+          <h3>Telescopic (LH/RH) Min Shaft Sizes</h3>
+          <table>
+            <tr>
+              <th>Clear Opening</th>
+              <th>Min Shaft Required</th>
+            </tr>
+            <tr><td>500</td><td>1050</td></tr>
+            <tr><td>550</td><td>1100</td></tr>
+            <tr><td>600</td><td>1200</td></tr>
+            <tr><td>650</td><td>1250</td></tr>
+            <tr><td>700</td><td>1300</td></tr>
+            <tr><td>750</td><td>1400</td></tr>
+            <tr><td>800</td><td>1450</td></tr>
+            <tr><td>900</td><td>1650</td></tr>
+            <tr><td>1000</td><td>1780</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Feet to Millimeters Converter -->
+      <h2>Feet to Millimeters Converter</h2>
+      <label for="feet">Feet:</label>
+      <input id="feet" type="number" placeholder="Enter feet" />
+      <button onclick="convertFeetToMm()">Convert</button>
+      <p>Millimeters: <span id="millimeters"></span></p>
+
+      <!-- Enter Dimensions -->
+      <h2>Enter Dimensions</h2>
+      <label for="mainWidth">Width (in mm):</label>
+      <input id="mainWidth" type="number" placeholder="Enter width" />
+      <label for="mainDepth">Depth (in mm):</label>
+      <input id="mainDepth" type="number" placeholder="Enter depth" />
+      <button onclick="calculateCabinDimensions()">Calculate</button>
+      <p class="warning">Note: All Measurements are in Millimeters (mm), Please provide values for width and depth.</p>
+
+      <!-- Hydraulic Tables -->
+      <h2>Hydraulic</h2>
+      <div class="tables-container1">
+        <div class="table-wrapper1">
+          <h3>Hydraulic Auto Door Central Opening (Mechanism in Width)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth1"></td>
+              <td id="displayDepth1"></td>
+              <td class="fixed-value">300</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">200</td>
+              <td class="result-cell"><input id="cabinWidth1" placeholder="Width 1" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth1" placeholder="Depth 1" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container2">
+        <div class="table-wrapper2">
+          <h3>Hydraulic Auto Door Central Opening (Mechanism in Depth)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth2"></td>
+              <td id="displayDepth2"></td>
+              <td class="fixed-value">300</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">70</td>
+              <td class="fixed-value">70</td>
+              <td class="fixed-value">200</td>
+              <td class="result-cell"><input id="cabinWidth2" placeholder="Width 2" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth2" placeholder="Depth 2" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container3">
+        <div class="table-wrapper3">
+          <h3>Hydraulic Auto Door Telescopic Opening (Mechanism in Width)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth3"></td>
+              <td id="displayDepth3"></td>
+              <td class="fixed-value">300</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">270</td>
+              <td class="result-cell"><input id="cabinWidth3" placeholder="Width 3" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth3" placeholder="Depth 3" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container4">
+        <div class="table-wrapper4">
+          <h3>Hydraulic Auto Door Telescopic Opening (Mechanism in Depth)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth4"></td>
+              <td id="displayDepth4"></td>
+              <td class="fixed-value">300</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">70</td>
+              <td class="fixed-value">70</td>
+              <td class="fixed-value">270</td>
+              <td class="result-cell"><input id="cabinWidth4" placeholder="Width 4" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth4" placeholder="Depth 4" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container5">
+        <div class="table-wrapper5">
+          <h3>Hydraulic Manual Swing Door (Mechanism in Width)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth5"></td>
+              <td id="displayDepth5"></td>
+              <td class="fixed-value">300</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">90</td>
+              <td class="result-cell"><input id="cabinWidth5" placeholder="Width 5" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth5" placeholder="Depth 5" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container6">
+        <div class="table-wrapper6">
+          <h3>Hydraulic Manual Swing Door (Mechanism in Depth)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth6"></td>
+              <td id="displayDepth6"></td>
+              <td class="fixed-value">300</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">70</td>
+              <td class="fixed-value">70</td>
+              <td class="fixed-value">90</td>
+              <td class="result-cell"><input id="cabinWidth6" placeholder="Width 6" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth6" placeholder="Depth 6" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+
+      <!-- Home Belt Tables -->
+      <h2>Home Belt</h2>
+      <div class="tables-container7">
+        <div class="table-wrapper7">
+          <h3>Home Belt Auto Door Central Opening (Mechanism in Width)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth7"></td>
+              <td id="displayDepth7"></td>
+              <td class="fixed-value">420</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">200</td>
+              <td class="result-cell"><input id="cabinWidth7" placeholder="Width 7" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth7" placeholder="Depth 7" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container8">
+        <div class="table-wrapper8">
+          <h3>Home Belt Auto Door Central Opening (Mechanism in Depth)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth8"></td>
+              <td id="displayDepth8"></td>
+              <td class="fixed-value">420</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">200</td>
+              <td class="result-cell"><input id="cabinWidth8" placeholder="Width 8" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth8" placeholder="Depth 8" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container9">
+        <div class="table-wrapper9">
+          <h3>Home Belt Auto Door Telescopic Opening (Mechanism in Width)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth9"></td>
+              <td id="displayDepth9"></td>
+              <td class="fixed-value">420</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">270</td>
+              <td class="result-cell"><input id="cabinWidth9" placeholder="Width 9" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth9" placeholder="Depth 9" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container10">
+        <div class="table-wrapper10">
+          <h3>Home Belt Auto Door Telescopic Opening (Mechanism in Depth)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth10"></td>
+              <td id="displayDepth10"></td>
+              <td class="fixed-value">420</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">270</td>
+              <td class="result-cell"><input id="cabinWidth10" placeholder="Width 10" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth10" placeholder="Depth 10" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container11">
+        <div class="table-wrapper11">
+          <h3>Home Belt Manual Swing Door (Mechanism in Width)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth11"></td>
+              <td id="displayDepth11"></td>
+              <td class="fixed-value">420</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">90</td>
+              <td class="result-cell"><input id="cabinWidth11" placeholder="Width 11" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth11" placeholder="Depth 11" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container12">
+        <div class="table-wrapper12">
+          <h3>Home Belt Manual Swing Door (Mechanism in Depth)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth12"></td>
+              <td id="displayDepth12"></td>
+              <td class="fixed-value">420</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">90</td>
+              <td class="result-cell"><input id="cabinWidth12" placeholder="Width 12" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth12" placeholder="Depth 12" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+
+      <!-- Home Rope Tables -->
+      <h2>Home Rope</h2>
+      <div class="tables-container13">
+        <div class="table-wrapper13">
+          <h3>Home Rope Auto Door Central Opening (Mechanism in Width)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth13"></td>
+              <td id="displayDepth13"></td>
+              <td class="fixed-value">420</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">200</td>
+              <td class="result-cell"><input id="cabinWidth13" placeholder="Width 13" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth13" placeholder="Depth 13" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container14">
+        <div class="table-wrapper14">
+          <h3>Home Rope Auto Door Central Opening (Mechanism in Depth)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth14"></td>
+              <td id="displayDepth14"></td>
+              <td class="fixed-value">420</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">200</td>
+              <td class="result-cell"><input id="cabinWidth14" placeholder="Width 14" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth14" placeholder="Depth 14" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container15">
+        <div class="table-wrapper15">
+          <h3>Home Rope Auto Door Telescopic Opening (Mechanism in Width)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth15"></td>
+              <td id="displayDepth15"></td>
+              <td class="fixed-value">420</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">270</td>
+              <td class="result-cell"><input id="cabinWidth15" placeholder="Width 15" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth15" placeholder="Depth 15" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container16">
+        <div class="table-wrapper16">
+          <h3>Home Rope Auto Door Telescopic Opening (Mechanism in Depth)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth16"></td>
+              <td id="displayDepth16"></td>
+              <td class="fixed-value">420</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">270</td>
+              <td class="result-cell"><input id="cabinWidth16" placeholder="Width 16" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth16" placeholder="Depth 16" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container17">
+        <div class="table-wrapper17">
+          <h3>Home Rope Manual Swing Door (Mechanism in Width)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth17"></td>
+              <td id="displayDepth17"></td>
+              <td class="fixed-value">420</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <td class="result-cell"><input id="cabinWidth17" placeholder="Width 17" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth17" placeholder="Depth 17" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container18">
+        <div class="table-wrapper18">
+          <h3>Home Rope Manual Swing Door (Mechanism in Depth)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth18"></td>
+              <td id="displayDepth18"></td>
+              <td class="fixed-value">420</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">90</td>
+              <td class="result-cell"><input id="cabinWidth18" placeholder="Width 18" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth18" placeholder="Depth 18" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+
+      <!-- MRL Tables -->
+      <h2>MRL</h2>
+      <div class="tables-container19">
+        <div class="table-wrapper19">
+          <h3>MRL Auto Central Opening (Mechanism in Width)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth19"></td>
+              <td id="displayDepth19"></td>
+              <td class="fixed-value">550</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">0</td>
+              <td class="fixed-value">90</td>
+              <td class="fixed-value">200</td>
+              <td class="result-cell"><input id="cabinWidth19" placeholder="Width 19" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth19" placeholder="Depth 19" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container20">
+        <div class="table-wrapper20">
+          <h3>MRL Auto Central Opening (Mechanism in Depth)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Guide Rails Two Side</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth20"></td>
+              <td id="displayDepth20"></td>
+              <td class="fixed-value">250</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">0</td>
+              <td class="fixed-value">0</td>
+              <td class="fixed-value">200</td>
+              <td class="fixed-value">300</td>
+              <td class="result-cell"><input id="cabinWidth20" placeholder="Width 20" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth20" placeholder="Depth 20" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container21">
+        <div class="table-wrapper21">
+          <h3>MRL Auto Telescope Opening (Mechanism in Width)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth21"></td>
+              <td id="displayDepth21"></td>
+              <td class="fixed-value">550</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">0</td>
+              <td class="fixed-value">90</td>
+              <td class="fixed-value">270</td>
+              <td class="result-cell"><input id="cabinWidth21" placeholder="Width 21" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth21" placeholder="Depth 21" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container22">
+        <div class="table-wrapper22">
+          <h3>MRL Auto Telescopic Opening (Mechanism in Depth)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Guide Rails Two Side</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth22"></td>
+              <td id="displayDepth22"></td>
+              <td class="fixed-value">250</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">0</td>
+              <td class="fixed-value">0</td>
+              <td class="fixed-value">270</td>
+              <td class="fixed-value">300</td>
+              <td class="result-cell"><input id="cabinWidth22" placeholder="Width 22" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth22" placeholder="Depth 22" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container23">
+        <div class="table-wrapper23">
+          <h3>MRL Manual Swing Door (Mechanism in Width)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth23"></td>
+              <td id="displayDepth23"></td>
+              <td class="fixed-value">550</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">0</td>
+              <td class="fixed-value">90</td>
+              <td class="fixed-value">90</td>
+              <td class="result-cell"><input id="cabinWidth23" placeholder="Width 23" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth23" placeholder="Depth 23" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+      <div class="tables-container24">
+        <div class="table-wrapper24">
+          <h3>MRL Manual Swing Door (Mechanism in Depth)</h3>
+          <table>
+            <tr>
+              <th>Width</th>
+              <th>Depth</th>
+              <th>Mechanism</th>
+              <th>Cabin Thickness</th>
+              <th>Buffer Between Cabin and Shaft in Width</th>
+              <th>Buffer Between Cabin and Shaft in Depth</th>
+              <th>Total Space Occupied By Door Including Buffer</th>
+              <th>Guide Rails Two Side</th>
+              <th>Cabin Width</th>
+              <th>Cabin Depth</th>
+            </tr>
+            <tr>
+              <td id="displayWidth24"></td>
+              <td id="displayDepth24"></td>
+              <td class="fixed-value">250</td>
+              <td class="fixed-value">60</td>
+              <td class="fixed-value">0</td>
+              <td class="fixed-value">0</td>
+              <td class="fixed-value">90</td>
+              <td class="fixed-value">300</td>
+              <td class="result-cell"><input id="cabinWidth24" placeholder="Width 24" readonly /></td>
+              <td class="result-cell"><input id="cabinDepth24" placeholder="Depth 24" readonly /></td>
+            </tr>
+          </table>
+          <p class="warning"><strong>Note:</strong> The measurements provided in this table are approximate estimates. Actual production dimensions may vary based on specific project requirements and configurations.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <h6>Dev By Sayeed Shaik</h6>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    function convertFeetToMm() {
+      const feet = parseFloat(document.getElementById("feet").value);
+      if (isNaN(feet)) {
+        alert("Please enter a valid number for feet.");
+        return;
+      }
+      const millimeters = feet * 304.8;
+      document.getElementById("millimeters").textContent = millimeters.toFixed(2);
+    }
+  </script>
+  <script src="calculateDimensions.js"></script>
+  <script src="displayDimensions.js"></script>
+</body>
+</html>
